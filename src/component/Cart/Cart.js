@@ -2,14 +2,14 @@ import React from "react";
 
 const Cart = (props) => {
   const cart = props.cart;
-  console.log(cart);
+  //console.log(cart);
 
-  const total = cart.reduce((total, prd) => total + prd.price, 0);
-  //   let total = 0;
-  //   for (let i = 0; i < cart.length; i++) {
-  //     const product = cart[i];
-  //     total = total + product.price;
-  //   }
+  //const total = cart.reduce((total, prd) => total + prd.price, 0);
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    const product = cart[i];
+    total = total + product.price * product.quantity;
+  }
   let shipping = 0;
   if (total > 35) {
     shipping = 0;
@@ -28,7 +28,7 @@ const Cart = (props) => {
 
   return (
     <div>
-      <h3> Order Summary </h3>
+      <h2 className="text-danger"> Order Summary </h2>
       <p>Items Ordered : {cart.length}</p>
       <p>Product Price : {formatNumber(total)}</p>
       <p>
@@ -37,7 +37,9 @@ const Cart = (props) => {
       <p>
         <small>Tax + VAT : {tax}</small>
       </p>
-      <p>Total Price : {finalTotal} </p>
+      <h3 className="text-danger">Total Price : {finalTotal} </h3>
+      <br />
+      {props.children}
     </div>
   );
 };
